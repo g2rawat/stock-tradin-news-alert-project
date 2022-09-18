@@ -8,8 +8,8 @@ yes_date=str(dt.datetime.today()-dt.timedelta(days=1)).split()[0]
 market_api="https://www.alphavantage.co/query?"
 news_api="https://newsapi.org/v2/everything"
 
-market_key="501WBMHPJW9ZZNM6"
-news_key="f509b6f54c10482a924f0b92969baea8"
+market_key=MARKET API
+news_key=NEWS key
 
 req_news={
     "q":"zomato",
@@ -109,14 +109,14 @@ if cal>2:
 
 
 # print(format_article)
-mail="g2jeetusuck@gmail.com"
-password="ykotdrxhzdckschc"
+mail=your mail id
+password=your password
 with smt.SMTP("smpt.gmail.com") as send:
     send.starttls()
     send.login(mail)
     send.sendmail(
         from_addr=mail,
-        to_addrs="rawabhi07@gmail.com",
+        to_addrs=reciver's mail,
         msg=f"subject:ZOMATO stock price\n\n{format_article}\n\nYou get Stock related NEWS only when volatility is more than 2%"
         )
 
