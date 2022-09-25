@@ -2,25 +2,29 @@ import requests as rq
 import smtplib as smt
 import datetime as dt
 import pandas as pd
+import os
 today_date=str(dt.datetime.today()).split()[0]
 yes_date=str(dt.datetime.today()-dt.timedelta(days=1)).split()[0]
 
 market_api="https://www.alphavantage.co/query?"
 news_api="https://newsapi.org/v2/everything"
 
-market_key=MARKET API
-news_key=NEWS key
+market_key=os.environ["MARKET_KEY"]  #environment variable
+news_key=os.environ["NEWS_KEY"]#environment variable
 
 req_news={
-    "q":"zomato",
+    "q":"zomato", #keyword for news report
     "language":"en",
     "from":today_date,
     "sortBy":"popularity",
     "apiKey":news_key
 }
 
-name_stk="ZOMATO.BSE"
+name_stk="ZOMATO.BSE"   #Company symbol market
 
+
+
+# for crypto market
 # req_crypto_market={
 #     "function":"DIGITAL_CURRENCY_DAILY",
 #     "symbol":name_stk,
@@ -102,21 +106,21 @@ news_p=news.json()["articles"][:5]
     # print(m["title"])
     # print(m["description"])
 # print(news_p)
-if cal>2:
+if cal>2: #get Stock related NEWS only when volatility is more than 2%
     format_article=[f"\nHeadline:{m['title']}.\n Brief: {m['description']} " for m in news_p]
     # for z in format_article:
     #     print(z)
 
 
 # print(format_article)
-mail=your mail id
-password=your password
+mail=os.environ["MAIL"]
+password="ykotdrxhzdckschc"
 with smt.SMTP("smpt.gmail.com") as send:
     send.starttls()
     send.login(mail)
     send.sendmail(
         from_addr=mail,
-        to_addrs=reciver's mail,
+        to_addrs=os.environ["TO_ADDRS"],
         msg=f"subject:ZOMATO stock price\n\n{format_article}\n\nYou get Stock related NEWS only when volatility is more than 2%"
         )
 
